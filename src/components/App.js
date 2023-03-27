@@ -3,6 +3,8 @@ import Footer from "./Footer";
 import Navbar from "./Navbar";
 import GlobalContext from "../contexts/GlobalContext";
 import { useState } from "react";
+import Article from "./Article";
+import Bande from "./Bande";
 
 const App = ()=>{
     
@@ -31,16 +33,26 @@ const App = ()=>{
             <div className="app">            
                 <Navbar/>            
                 <div className="container">
-                    <div className="lef_container">
-                        <div className="lef_container_top"></div>
-                        <div className="lef_container_middle"></div>
-                        <div className="lef_container_bottom"></div>
+                    <div className="lef_container">                        
+                        <Bande position={'top'}/>                        
+                        <div className="lef_container_middle">
+                            <Article/>
+                            <Article/>
+                            <Article/>
+                            <Article/>
+                            <Article/>
+                            <Article/>
+                            <Article/>
+                            <Article/>
+                        </div>                        
+                        <Bande position={''}/> 
                     </div>
                     <div className="rigth_container">
                         <Display/>
                         <Footer actionEncours="modifyProduct" produitEncours='' />
                     </div>
-                </div>
+                    <Bande position={'bottom'}/>
+                </div>                
             </div>
         </GlobalContext.Provider>      
     )

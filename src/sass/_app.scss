@@ -26,12 +26,7 @@
     min-width: $min_width;
     width: 25%;    
 }
-.lef_container_top,.lef_container_bottom{
-    width: 100%;
-    height: 4.5rem;
-    color: $primary_color;
-    background-color: $black_background;
-}
+
 .lef_container_middle,.rigth_container_display{
     flex-grow: 1;
     background-color: $gray_background;
