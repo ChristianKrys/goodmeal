@@ -18,6 +18,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     background-color: $gray_background;
+    overflow: scroll;
 }
 .lef_container{
     display: flex;
