@@ -49,3 +49,28 @@
     color:$primary_color;
     font-size: 1.4rem;
 }
+.article{
+    &:hover{
+        span{display:inline-block;}
+    }
+}
+.article_left_upload{
+    display: none;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    &:hover{
+        background-color: red;
+        color: #fff;
+    }
+}
+.article_left_download{
+    display: none;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    &:hover{
+        background-color: green;
+        color: #fff;
+    }
+}
+
+

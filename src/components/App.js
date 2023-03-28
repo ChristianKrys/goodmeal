@@ -9,19 +9,46 @@ import Bande from "./Bande";
 const App = ()=>{
     
     const emptyProduit = {
-        urlPhoto:'',
+        urlPhoto:'images/burger.jpg',
         libelleProduit:'Tomate',
-        prixProduit:'200',
+        prixProduit:200,
         enstock:true,
         avecpublicite:true,
-        description:'La tomate brune'
+        description:'La tomate brune',
+        codeProduit:'coco'
     } 
-    
+    const article = {
+        quantiteArticle : 5,
+        produit : {...emptyProduit}
+    }
+    const commande = {
+        tableArticle : [article],
+        idClient : 0,
+        statutCommande : '',
+        dateCommande : null,
+        heureCommande : null
+    }
+
+    const utilisateur = {
+        nomUtilisateur : '',
+        prenomUtilisateur : '',
+        telephoneUtilisateur : '',
+        emailUtilisateur : '',
+        addresseUtilisateur : '',
+        statutUtilisateur : ''
+    }
+
+    //statutCommande : livree, nonlivree
     //action : addProduct, modifyProduct
+    //statutUtilisateur : client, personnel, administrateur
+
     const globalStore = {
         actionEncours:'',
-        produitEncours:{...emptyProduit},
-        displayFooter:false
+        devise:'£',
+        displayFooter:false, 
+        produitEncours:{...emptyProduit},               
+        commandeEnCours : {...commande},
+        utilisateurEnCours : {...utilisateur}
     }
 
     const [paramGlobal,setParamGlobal] = useState(globalStore);
@@ -36,6 +63,7 @@ const App = ()=>{
                     <div className="lef_container">                        
                         <Bande position={'top'}/>                        
                         <div className="lef_container_middle">
+                            <Article newArticle={article}/>
                             <Article/>
                             <Article/>
                             <Article/>
@@ -43,8 +71,8 @@ const App = ()=>{
                             <Article/>
                             <Article/>
                             <Article/>
-                            <Article/>
-                        </div>                        
+                            <div className="lef_container_Btn_valider_commande">Valider la commande</div>
+                        </div>                                             
                         <Bande position={''}/> 
                     </div>
                     <div className="rigth_container">

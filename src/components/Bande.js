@@ -10,20 +10,19 @@ const Bande = ({position}) => {
         <div className="lef_container_top">
             <div className="lef_container_top_lib">TOTAL : </div>               
             <div className="lef_container_top_total">37,70 £</div>
-            <span class="material-symbols-outlined">shopping_cart</span>            
+            <span className="material-symbols-outlined">shopping_cart</span>            
         </div>);
 
     const bottom_band = (
         <div className="lef_container_bottom">
-            <div className="lef_container_bottom_message">Bonnne réjouissance</div>
+            <div className="lef_container_bottom_message">Bonnne réjouissance !!!</div>
             <div className="lef_container_bottom_design_by"><small>Designed by eencsoft</small></div>
         </div>
     )
  
 
     useEffect(() => {
-        setBande(position);
-        console.log(position);
+        setBande(position);        
     }, []);
 
     return ( 

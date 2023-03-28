@@ -56,6 +56,19 @@ body {
   min-width: 300px;
 }
 
+.lef_container_Btn_valider_commande {
+  background-color: #ff9418;
+  color: #fff;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+.lef_container_Btn_valider_commande:hover {
+  background-color: #046109;
+}
+
 @media screen and (max-width: 1250px) {
   .lef_container {
     width: 100%;
@@ -508,6 +521,30 @@ body {
   font-family: Helvetica, Arial, sans-serif;
   color: #ff9418;
   font-size: 1.4rem;
+}
+
+.article:hover span {
+  display: inline-block;
+}
+
+.article_left_upload {
+  display: none;
+  cursor: pointer;
+  border-radius: 0.5rem;
+}
+.article_left_upload:hover {
+  background-color: red;
+  color: #fff;
+}
+
+.article_left_download {
+  display: none;
+  cursor: pointer;
+  border-radius: 0.5rem;
+}
+.article_left_download:hover {
+  background-color: green;
+  color: #fff;
 }
 
 .lef_container_top, .lef_container_bottom {

@@ -5,7 +5,7 @@ const Produit = () => {
                 <div className="produit_top_image"><img src="images/burger.jpg" alt="" /></div>
                 <div className="produit_top_Btn_Supprimer">X</div>
                 <div className="produit_top_bande_Nouveau"><img src="images/new.png" alt="" /></div>
-                <div className="produit_top_bande_Epuise"><img src="images/epuise1.png" alt="" /></div>
+                <div className="produit_top_bande_Epuise"><img src="images/epuise2.png" alt="" /></div>
             </div>
             <div className="produit_libelle">BONBONS BONUS</div>
             <div className="produit_bottom">
