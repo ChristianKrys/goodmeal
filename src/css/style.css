@@ -58,17 +58,28 @@ body {
   flex-grow: 1;
 }
 
-.lef_container_Btn_valider_commande {
+.lef_container_Btn_valider_commande, .lef_container_Btn_vider_panier {
   background-color: #ff9418;
   color: #fff;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 1.2rem;
+  text-align: center;
   padding: 0.5rem 1.5rem;
   border-radius: 0.3rem;
+  margin-top: 1rem;
+  width: 250px;
   cursor: pointer;
 }
+.lef_container_Btn_valider_commande:hover, .lef_container_Btn_vider_panier:hover {
+  background-color: #046109;
+}
+
 .lef_container_Btn_valider_commande:hover {
   background-color: #046109;
+}
+
+.lef_container_Btn_vider_panier:hover {
+  background-color: red;
 }
 
 @media screen and (max-width: 1250px) {
@@ -86,7 +97,7 @@ body {
   .navbar_login_btn_admin_image, .navbar_login_connexion {
     margin: 0.3rem !important;
   }
-  #ajouter3, #modifier3 {
+  #ajouter3, #modifier3, #lister3 {
     display: none;
   }
   .footer_input input, .footer_input select {

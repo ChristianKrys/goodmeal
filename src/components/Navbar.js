@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import GlobalContext from "../contexts/GlobalContext";
 
 const Navbar = () => {
@@ -7,8 +7,8 @@ const Navbar = () => {
     const {actionEncours,devise,displayFooter,produitEncours,commandeEnCours,utilisateurEnCours,listeProduit,modeEnCours,authentificationEnCours} = paramGlobal;
     //const {tableArticle,idClient,statutCommande,dateCommande,heureCommande} = {...commandeEnCours};
 
-    const [typeCompte,setTypeCompte] = useState("visiteur");
-    const [modeConnexion,setModeConnexion] = useState("client");
+    //const [typeCompte,setTypeCompte] = useState("visiteur");
+    //const [modeConnexion,setModeConnexion] = useState("client");
 
     const utilisateur = {
         nomUtilisateur : '',
@@ -31,11 +31,49 @@ const Navbar = () => {
     const deconnexion = (utilisateurEnCours.typeCompteUtilisateur==="visiteur") ? "Se Connecter" : "Déconnexion";
 
     const changeModeEnCours = ()=>{
-        const newModeEnCours = paramGlobal.modeEnCours === "admin" ? "client" : "admin";
+        const newModeEnCours = paramGlobal.modeEnCours === "admin" ? "client" : "admin";        
         setParamGlobal({...paramGlobal,modeEnCours:newModeEnCours})
     }
 
-    const handleauthentificationEnCours = ()=>{setParamGlobal({...paramGlobal,authentificationEnCours:!paramGlobal.authentificationEnCours})}
+    const handleauthentificationEnCours = ()=>{        
+        if(utilisateurEnCours.typeCompteUtilisateur==="visiteur")
+        {
+            setParamGlobal({...paramGlobal,authentificationEnCours:true});
+        }else{
+            const utilisateur = {        
+                nomUtilisateur : '',
+                prenomUtilisateur : '',
+                telephoneUtilisateur : '',
+                emailUtilisateur : '',
+                addresseUtilisateur : '',
+                statutUtilisateur : '',  
+                typeCompteUtilisateur : 'visiteur'  ,
+                login : '',
+                pwd : '',
+                id : 0   
+            }
+            const commande = {
+                tableArticle : [],
+                idClient : 0,
+                statutCommande : '',
+                dateCommande : null,
+                heureCommande : null,
+                montantTotalParCommande : (tableArticle)=>{
+                        let montant = 0;
+                        tableArticle.forEach(element => {
+                            montant += element.montantTotalParArticle(element.quantiteArticle,element.produit.prixProduit);                    
+                         });                           
+                        return montant;        
+                },
+            }
+            setParamGlobal({...paramGlobal,commandeEnCours:{...commande},modeEnCours:"client",utilisateurEnCours : {...utilisateur},authentificationEnCours:false })  
+        }
+    }
+
+
+    useEffect(() => {
+        
+    }, []);
 
     return ( 
         <div className="navbar">
@@ -44,11 +82,13 @@ const Navbar = () => {
                 <div><img className="navbar_logo_image" src="images/burger.jpg" alt="" /></div>
                 <div className="navbar_logo_titre">BURGER</div>
             </div>
+            
             <div className="navbar_login">
                 {utilisateurEnCours.typeCompteUtilisateur === 'administrateur'  && <div className="navbar_login_btn_admin" onClick={changeModeEnCours}>
                     <div className="navbar_login_btn_admin_texte">{handleModeConnexion}</div>
                     <div className="navbar_login_btn_admin_image"></div>
                 </div>}
+                
                 <div className="navbar_login_connexion">
                     <div className="navbar_login_connexion_identifiant">
                         {!(utilisateurEnCours.typeCompteUtilisateur==="visiteur") && <div className="navbar_login_connexion_identifiant_salutation">
@@ -61,6 +101,7 @@ const Navbar = () => {
                         <img src="images/logo_profil.png" alt="" />
                     </div>
                 </div>
+
             </div>
 
         </div>

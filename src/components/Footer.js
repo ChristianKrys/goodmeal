@@ -15,10 +15,10 @@ const Footer = () => {
     }        
 
     const {paramGlobal,setParamGlobal} = useContext(GlobalContext);
-    const {actionEncours:action,produitEncours,displayFooter} = paramGlobal;
-
+    const {actionEncours:action,produitEncours,displayFooter,urlServer,listeProduit} = paramGlobal;
+    
     //action : addProduct, modifyProduct
-    const [product,setProduct] = useState({...emptyProduit,...produitEncours});
+    const [product,setProduct] = useState({...emptyProduit,...produitEncours});    
     //const [action,setAction] = useState(actionEncours);
     
 
@@ -38,19 +38,74 @@ const Footer = () => {
         }
     }
     
+    function addProduct(product){ 
+        const url = urlServer+"Produit";          
+        fetch(url,{
+            method: 'POST',
+            headers: {'Content-type':'application/json'},
+            body: JSON.stringify(product)                    
+        })
+        .then(response =>{
+            //------ Quand la requete est executée ------
+            if(!response.ok){
+                throw Error('Echec d\'enregistrement de produit !')
+            }else{
+                console.log('Enregistré avec succès !');
+                setParamGlobal({...paramGlobal,produitEncours:emptyProduit});
+            }
+        })
+        .catch((err)=>{
+            //------- Recuperation de message d'erreur -------
+            console.log(err.message);                        
+        })
+    }
 
-    useEffect(() => {        
+    function modifyProduct(product){ 
+        const id = product.id;
+        const url = urlServer+"Produit/"+id;          
+        fetch(url,{
+            method: 'PATCH',
+            headers: {'Content-type':'application/json'},
+            body: JSON.stringify(product)                    
+        })
+        .then(response =>{
+            //------ Quand la requete est executée ------
+            if(!response.ok){
+                throw Error('Echec d\'enregistrement de produit !')
+            }else{
+                console.log('Modifié avec succès !');
+                setParamGlobal({...paramGlobal,produitEncours:emptyProduit});
+            }
+        })
+        .catch((err)=>{
+            //------- Recuperation de message d'erreur -------
+            console.log(err.message);                        
+        })
+    }
 
-        setProduct({...emptyProduit,...produitEncours});
+    
+
+    function handleSubmit(evt){
+        evt.preventDefault(); 
+
+        if(!urlServer) return
+        if(action==="addProduct") addProduct(product);
+        if(action==="modifyProduct") modifyProduct(product);
+    }
+
+    useEffect(() => {                        
+          
+        if(action==="addProduct") setProduct({...emptyProduit}); 
+        if(action==="modifyProduct") setProduct({...emptyProduit,...produitEncours});      
 
     }, [paramGlobal]); //------ Raffraichir si paramGlobal change ----------
 
 
     return ( 
     <>
-        {displayFooter && paramGlobal.modeEnCours === "admin" &&
+        {displayFooter && paramGlobal.modeEnCours === "admin" && action!=="listerCommande" &&
         <div className="rigth_container_footer">                                 
-            <form action="">
+            <form action="" onSubmit={handleSubmit}>
                 <div className="rigth_container_footer_form">
                     <div className="rigth_container_footer_top">
                         <div className="rigth_container_footer_top_image_menu"> 
@@ -82,9 +137,9 @@ const Footer = () => {
                                 </div>
                                 <div className="footer_input rigth_container_footer_top_champ_properties_pub">
                                     <span className="material-symbols-outlined">campaign</span>                                    
-                                    <select onChange={(e)=>{handleChange(e)}} name="avecpublicite" value={product.avecpublicite}>
-                                        <option value={false}>Sans pub</option>
+                                    <select onChange={(e)=>{handleChange(e)}} name="avecpublicite" value={product.avecpublicite}>                                        
                                         <option value={true}>Avec pub</option>
+                                        <option value={false}>Sans pub</option>
                                     </select>
                                 </div>
 

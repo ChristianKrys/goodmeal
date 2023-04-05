@@ -58,7 +58,15 @@ const Display_menu = () => {
             setAction({derouler:valClass,ajouter:valClass,modifier:valClass_selected})
 
             setParamGlobal({...paramGlobal,actionEncours:'modifyProduct',displayFooter:true});
-        }        
+        }   
+        if(targetId.search("lister") >= 0){
+        /*  setDerouler(valClass);
+            setAjouter(valClass);
+            setModifier(valClass_selected); */
+            setAction({derouler:valClass,ajouter:valClass,modifier:valClass,lister:valClass_selected})
+        
+            setParamGlobal({...paramGlobal,actionEncours:'listerCommande',displayFooter:true});
+        }      
     }
 
     useEffect(() => {
@@ -78,6 +86,10 @@ const Display_menu = () => {
                 <div id="modifier1" className={action.modifier+" btn_rigth_container_display_menu"} onClick={(e)=>{handleClick(e)}}>
                     <span id="modifier2" className="material-symbols-outlined">Edit</span>
                     <span id="modifier3">Modifier un produit</span>
+                </div>
+                <div id="lister1" className={action.lister+" btn_rigth_container_display_menu"} onClick={(e)=>{handleClick(e)}}>
+                    <span id="lister2" className="material-symbols-outlined">shopping_cart</span>
+                    <span id="lister3">Lister les commandes</span>
                 </div>
             </div>}
         </>

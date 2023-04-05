@@ -14,12 +14,12 @@ const Display_contenu = () => {
 
     return ( 
         <>
-            {!authentificationEnCours && <div className="rigth_container_display_affichage"> 
-                {listeProduit.map((produit)=>{
+            {!authentificationEnCours && <div className="rigth_container_display_affichage">             
+                {listeProduit.map((produit)=>{                    
                     return <Produit key={produit.codeProduit} newProduit={produit}/>
                 })}     
             </div>}
-            {authentificationEnCours && <IdentificationForm />}
+            {authentificationEnCours && <IdentificationForm />}                                 
         </>
      );
 }

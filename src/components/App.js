@@ -2,76 +2,13 @@ import Display from "./Display";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import GlobalContext from "../contexts/GlobalContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Article from "./Article";
 import Bande from "./Bande";
 import AffichePanier from "./AffichePanier";
 
 const App = ()=>{
     
-
-    const emptyProduit1 = {
-        urlPhoto:'images/burger.jpg',
-        libelleProduit:'Tomate',
-        prixProduit:100,
-        enstock:true,
-        avecpublicite:true,
-        description:'La tomate brune',
-        codeProduit:'coco'
-    } 
-
-    const emptyProduit2 = {
-        urlPhoto:'images/frite.jpg',
-        libelleProduit:'NEW YORK FRITS',
-        prixProduit:50,
-        enstock:true,
-        avecpublicite:false,
-        description:'Les frites de New York',
-        codeProduit:'papa'
-    } 
-
-    const emptyProduit3 = {
-        urlPhoto:'images/produit2.jpg',
-        libelleProduit:'COCKTAIL',
-        prixProduit:160,
-        enstock:false,
-        avecpublicite:false,
-        description:'Les frites de New York',
-        codeProduit:'hgjjgf'
-    } 
-
-    const emptyProduit4 = {
-        urlPhoto:'images/produit4.jpg',
-        libelleProduit:'Ndjomba Secret',
-        prixProduit:1500,
-        enstock:true,
-        avecpublicite:false,
-        description:'La tomate brune',
-        codeProduit:'commco'
-    } 
-
-    const emptyProduit5 = {
-        urlPhoto:'images/produit6.jpg',
-        libelleProduit:'Basket',
-        prixProduit:50,
-        enstock:true,
-        avecpublicite:false,
-        description:'Les frites de New York',
-        codeProduit:'fhhf'
-    } 
-
-    const emptyProduit6 = {
-        urlPhoto:'images/clou.png',
-        libelleProduit:'COCKTAIL',
-        prixProduit:160,
-        enstock:false,
-        avecpublicite:false,
-        description:'Les frites de New York',
-        codeProduit:'hggf'
-    } 
-
-    const initlisteProduit = [emptyProduit1,emptyProduit2,emptyProduit3,emptyProduit4,emptyProduit5,emptyProduit6]
-
     const emptyProduit = {
         urlPhoto:'',
         libelleProduit:'',
@@ -79,10 +16,11 @@ const App = ()=>{
         enstock:false,
         avecpublicite:false,
         description:'',
-        codeProduit:''
+        codeProduit:'',
+        id:0
     } 
     const article = {
-        quantiteArticle : 2,
+        quantiteArticle : 0,
         produit : {...emptyProduit},
         montantTotalParArticle : (quantiteArticle,prixProduit)=>{return quantiteArticle*prixProduit}
     }
@@ -101,19 +39,19 @@ const App = ()=>{
                 return montant;        
         },
     }
-
-    const utilisateur = {
+    
+    const utilisateur = {        
         nomUtilisateur : '',
-        prenomUtilisateur : 'Christian',
+        prenomUtilisateur : '',
         telephoneUtilisateur : '',
         emailUtilisateur : '',
         addresseUtilisateur : '',
         statutUtilisateur : '',  
-        typeCompteUtilisateur : 'administrateur'      
+        typeCompteUtilisateur : 'visiteur'      
     }
 
     //statutCommande : livree, nonlivree
-    //action : addProduct, modifyProduct
+    //action : addProduct, modifyProduct, listerCommande
     //typeCompteUtilisateur : visiteur,abonne, administrateur
     //modeEnCours : admin, client
 
@@ -124,19 +62,71 @@ const App = ()=>{
         produitEncours:{...emptyProduit},               
         commandeEnCours : {...commande},
         utilisateurEnCours : {...utilisateur},
-        listeProduit : [...initlisteProduit],
+        listeProduit : [],
+        listeUtilisateur : [],        
+        listeCommande : [],
         modeEnCours: 'client',
-        authentificationEnCours: false
+        authentificationEnCours: false,
+        urlServer : 'http://localhost:8001/'
     }
 
     const [paramGlobal,setParamGlobal] = useState(globalStore);
-    const {actionEncours,devise,displayFooter,produitEncours,commandeEnCours,utilisateurEnCours,listeProduit,modeEnCours,authentificationEnCours} = paramGlobal;
+    const [isLoading,setisLoading] = useState(false);
+    const [error,setError] = useState(false);
+    const [dataBase,setDataBase] = useState({listeProduit:[],listeClient:[],listeEmployer:[],listeCommande:[]})
+
+    const {actionEncours,devise,displayFooter,produitEncours,commandeEnCours,utilisateurEnCours,listeProduit,modeEnCours,authentificationEnCours,urlServer} = paramGlobal;
     const {tableArticle,idClient,statutCommande,dateCommande,heureCommande} = {...commandeEnCours};
     
+    useEffect(() => {
+
+        if(!urlServer) return
+        
+        let listeProduit = [];        
+        let listeUtilisateur = [];
+        let listeCommande = [];
+
+        async function fetchData(table){
+            
+            if (!table) return;
+
+            const url = urlServer+table;
+            
+            await fetch(url)
+            .then((reponse)=>{
+                setisLoading(false);
+                if(!reponse.ok){
+                    throw Error('Désolé, une erreur est survenue');
+                }                
+                return reponse.json();                
+            })
+            .then((data)=>{                                             
+                if(table === "Produit") listeProduit = data;
+                if(table === "Utilisateur") listeUtilisateur = data;                
+                if(table === "Commande") listeCommande = data;                              
+            })
+            .catch((err)=>{
+                console.log(err.message);
+                setError(true);
+            }) 
+
+            setParamGlobal({...paramGlobal,
+                listeProduit : listeProduit,
+                listeUtilisateur : listeUtilisateur,
+                listeCommande : listeCommande
+            })                                 
+        }
+
+        //--Table : Produit, Client, Employer, Commande
+        fetchData("Produit");
+        fetchData("Utilisateur");
+        fetchData("Commande");                              
+
+    }, []);
     
 
     return(  
-        <GlobalContext.Provider value={{paramGlobal,setParamGlobal}}>
+        <GlobalContext.Provider value={{paramGlobal,setParamGlobal}}>            
             <div className="app">            
                 <Navbar/>            
                 <div className="container">
@@ -149,7 +139,7 @@ const App = ()=>{
                         <Display/>
                         {!authentificationEnCours && <Footer actionEncours="modifyProduct" produitEncours='' />}
                     </div>
-                    {!authentificationEnCours && <Bande position={'bottom'}/>}
+                    {!authentificationEnCours && <Bande position={'bottom'}/>}                    
                 </div>                
             </div>
         </GlobalContext.Provider>      

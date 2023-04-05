@@ -4,7 +4,7 @@ import GlobalContext from "../contexts/GlobalContext";
 const Produit = ({newProduit}) => {
 
     const {paramGlobal,setParamGlobal} = useContext(GlobalContext);
-    const {actionEncours,devise,displayFooter,produitEncours,commandeEnCours,utilisateurEnCours,listeProduit} = paramGlobal;
+    const {actionEncours,modeEnCours,devise,displayFooter,produitEncours,commandeEnCours,utilisateurEnCours,listeProduit,urlServer} = paramGlobal;
     const {tableArticle,idClient,statutCommande,dateCommande,heureCommande} = {...commandeEnCours};
 
     const emptyProduit = {
@@ -21,6 +21,8 @@ const Produit = ({newProduit}) => {
     const [supprimerProduit,setSupprimerProduit] = useState(false);
 
     const handleClickAjouter = ()=>{
+
+        if(copyNewProduit.enstock === false) return
 
         const article = {
             quantiteArticle : 1,
@@ -39,7 +41,7 @@ const Produit = ({newProduit}) => {
                 //indexArticle += 1;
                 indexArticle = index;                
             }
-        });
+        });        
 
         if(indexArticle > -1){
             //----- articleEnEntree est dejà présent dans commandeEnCours --------                      
@@ -50,12 +52,38 @@ const Produit = ({newProduit}) => {
         } ;
         
         const updateCommande = {...commandeEnCours,tableArticle:[...copyTableArticle]};
-        setParamGlobal({...paramGlobal,commandeEnCours:{...updateCommande}})                  
+        setParamGlobal({...paramGlobal,commandeEnCours:{...updateCommande}})                
+    }
+
+    function supprimeProduct(product){ 
+        let suppressionReussie = true;
+        const id = product.id;
+        const url = urlServer+"Produit/"+id;          
+        fetch(url,{
+            method: 'DELETE',                  
+        })
+        .then(response =>{
+            //------ Quand la requete est executée ------
+            if(!response.ok){
+                throw Error('Echec de suppression de produit !')
+                suppressionReussie = false;
+            }else{
+                console.log('Supprimé avec succès !');                
+                setParamGlobal({...paramGlobal,produitEncours:emptyProduit});
+            }
+        })
+        .catch((err)=>{
+            //------- Recuperation de message d'erreur -------
+            console.log(err.message);                        
+        })
+        return suppressionReussie;
     }
 
 
     const handleSupprimeProduit = ()=>{
         
+        if(!supprimeProduct(copyNewProduit)) return;
+
         //let confirmSupp = confirm("Voulez-vous vraiment supprimer cet article de la boutique ?");
         //---- Suppression de l'élément dans la commande en cours ---------
         const newtableArticle = tableArticle.filter((element)=>element.produit.codeProduit !== copyNewProduit.codeProduit);
@@ -74,10 +102,14 @@ const Produit = ({newProduit}) => {
     
         //------ Abandon de suppression ----------------
         
-    }    
+    }  
+    
+    const handleProduitEncours = ()=>{
+        if(modeEnCours === "admin") setParamGlobal({...paramGlobal,produitEncours:{...copyNewProduit}})
+    }
 
     return ( !supprimerProduit &&
-        <div className={copyNewProduit.enstock ?"produit":"produit assombrir"}>
+        <div onClick={handleProduitEncours} className={copyNewProduit.enstock ?"produit":"produit assombrir"}>
             <div className="produit_top">
                 <div className="produit_top_image"><img src={copyNewProduit.urlPhoto} alt="" /></div>
                 {(paramGlobal.modeEnCours === "admin" ) && <div className="produit_top_Btn_Supprimer" onClick={handleSupprimeProduit}>X</div>}

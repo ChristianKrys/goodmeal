@@ -1,60 +1,149 @@
 {
-  "blogs": [
+  "Produit": [
     {
-      "id": 1,
-      "title": "Bienvenue a mon blog",
-      "author": "laborum KOUANTOUM",
-      "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium",
-      "email": "Eliseo@gardner.biz",
-      "date": "02/01/2021"
+      "urlPhoto": "images/burger.jpg",
+      "libelleProduit": "Tomate",
+      "prixProduit": 100,
+      "enstock": true,
+      "avecpublicite": true,
+      "description": "Le burger à l'huile de chèvre",
+      "codeProduit": "coco",
+      "id": 1
     },
     {
-      "id": 2,
-      "title": "La nuit des codeurs",
-      "author": "Duplex KAMDOUM",
-      "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium est natus enim nihil est dolore omnis voluptatem numquam\net omnis occaecati quod ullam at\nvoluptatem error expedita pariatur\nnihil sint nostrum voluptatem reiciendis et",
-      "email": "Jayne_Kuhic@sydney.com",
-      "date": "02/01/2021"
+      "urlPhoto": "images/frite.jpg",
+      "libelleProduit": "NEW YORK FRITS",
+      "prixProduit": 50,
+      "enstock": true,
+      "avecpublicite": false,
+      "description": "Les frites de New York",
+      "codeProduit": "papa",
+      "id": 2
     },
     {
-      "id": 3,
-      "title": "Un autre blog",
-      "author": "laborum KOUANTOUM",
-      "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium",
-      "email": "Eliseo@gardner.biz",
-      "date": "02/01/2021"
+      "urlPhoto": "images/produit2.jpg",
+      "libelleProduit": "COCKTAIL",
+      "prixProduit": 160,
+      "enstock": false,
+      "avecpublicite": false,
+      "description": "Les frites de New York",
+      "codeProduit": "hgjjgf",
+      "id": 3
     },
     {
-      "id": 4,
-      "title": "Troisieme title",
-      "author": "Duplex KAMDOUM",
-      "body": "est natus enim nihil est dolore omnis voluptatem numquam\net omnis occaecati quod ullam at\nvoluptatem error expedita pariatur\nnihil sint nostrum laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium voluptatem reiciendis et",
-      "email": "Jayne_Kuhic@sydney.com",
-      "date": "02/01/2021"
+      "urlPhoto": "images/produit6.jpg",
+      "libelleProduit": "Basket",
+      "prixProduit": 50,
+      "enstock": true,
+      "avecpublicite": false,
+      "description": "Les frites de New York",
+      "codeProduit": "fhhf",
+      "id": 4
     },
     {
-      "title": "hfhffgg fhfh",
-      "author": "Jean-PirrePARPING",
-      "body": "dfg ghghg ghhhgh",
-      "email": "",
-      "date": "22/03/2023 10:39:40",
+      "urlPhoto": "images/clou.png",
+      "libelleProduit": "COCKTAIL",
+      "prixProduit": 160,
+      "enstock": false,
+      "avecpublicite": false,
+      "description": "Les frites de New York",
+      "codeProduit": "hggf",
       "id": 5
     },
     {
-      "title": "la nuit blanche de tintin",
-      "author": "Jean-PirrePARPING",
-      "body": "lkkjjjdgj dkfhjhjk jbkjhdj jkdgkgk idiuvhvj bjbskjj bkbjsbkjbkjbjb lkkjjjdgj dkfhjhjk jbkjhdj jkdgkgk idiuvhvj bjbskjj bkbjsbkjbkjbjb lkkjjjdgj dkfhjhjk jbkjhdj jkdgkgk idiuvhvj bjbskjj bkbjsbkjbkjbjb lkkjjjdgj dkfhjhjk jbkjhdj jkdgkgk idiuvhvj bjbskjj bkbjsbkjbkjbjb lkkjjjdgj dkfhjhjk jbkjhdj jkdgkgk idiuvhvj bjbskjj bkbjsbkjbkjbjb lkkjjjdgj dkfhjhjk jbkjhdj jkdgkgk idiuvhvj bjbskjj bkbjsbkjbkjbjb lkkjjjdgj dkfhjhjk jbkjhdj jkdgkgk idiuvhvj bjbskjj bkbjsbkjbkjbjb lkkjjjdgj dkfhjhjk jbkjhdj jkdgkgk idiuvhvj bjbskjj bkbjsbkjbkjbjb 123",
-      "email": "",
-      "date": "22/03/2023 11:44:54",
+      "urlPhoto": "images/produit4.jpg",
+      "libelleProduit": "Ndjomba Secret",
+      "prixProduit": 1500,
+      "enstock": true,
+      "avecpublicite": false,
+      "description": "La tomate brune",
+      "codeProduit": "commco",
       "id": 6
+    }
+  ],
+  "Utilisateur": [
+    {
+      "nomUtilisateur": "",
+      "prenomUtilisateur": "Christian",
+      "telephoneUtilisateur": "",
+      "emailUtilisateur": "",
+      "addresseUtilisateur": "",
+      "statutUtilisateur": "",
+      "typeCompteUtilisateur": "administrateur",
+      "login": "a",
+      "pwd": "a",
+      "id": 1
     },
     {
-      "title": "oh lalaaaa",
-      "author": "EDINGLamour",
-      "body": "fhffhkjk\nffku fihihi ihiuf uhiuhuf uhiuhiuhkh\nffku ffku fihihi ihiuf uhiuhuf uhiuhiuhkh fihihi ihiuf uhiuhuf uhiuhiuhkh\nffku fihihi ihiuf uhiuhuf uhiuhiuhkh",
-      "email": "",
-      "date": "22/03/2023 11:47:36",
-      "id": 7
+      "nomUtilisateur": "",
+      "prenomUtilisateur": "Angelo la Débrouille",
+      "telephoneUtilisateur": "",
+      "emailUtilisateur": "",
+      "addresseUtilisateur": "",
+      "statutUtilisateur": "",
+      "typeCompteUtilisateur": "abonne",
+      "login": "b",
+      "pwd": "b",
+      "id": 2
+    }
+  ],
+  "Commande": [
+    {
+      "tableArticle": [
+        {
+          "quantiteArticle": 2,
+          "produit": {
+            "urlPhoto": "images/burger.jpg",
+            "libelleProduit": "Tomate",
+            "prixProduit": 100,
+            "enstock": true,
+            "avecpublicite": true,
+            "description": "Le burger à l'huile de chèvre",
+            "codeProduit": "coco",
+            "id": 1
+          }
+        }
+      ],
+      "idClient": 0,
+      "statutCommande": "",
+      "dateCommande": null,
+      "heureCommande": null,
+      "id": 1
+    },
+    {
+      "tableArticle": [
+        {
+          "quantiteArticle": 1,
+          "produit": {
+            "urlPhoto": "images/burger.jpg",
+            "libelleProduit": "Tomate",
+            "prixProduit": 100,
+            "enstock": true,
+            "avecpublicite": true,
+            "description": "Le burger à l'huile de chèvre",
+            "codeProduit": "coco",
+            "id": 1
+          }
+        },
+        {
+          "quantiteArticle": 5,
+          "produit": {
+            "urlPhoto": "images/frite.jpg",
+            "libelleProduit": "NEW YORK FRITS",
+            "prixProduit": 50,
+            "enstock": true,
+            "avecpublicite": false,
+            "description": "Les frites de New York",
+            "codeProduit": "papa",
+            "id": 2
+          }
+        }
+      ],
+      "idClient": 0,
+      "statutCommande": "",
+      "dateCommande": null,
+      "heureCommande": null,
+      "id": 2
     }
   ]
 }
