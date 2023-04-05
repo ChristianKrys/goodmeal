@@ -48,7 +48,7 @@ const Footer = () => {
 
     return ( 
     <>
-        {displayFooter && 
+        {displayFooter && paramGlobal.modeEnCours === "admin" &&
         <div className="rigth_container_footer">                                 
             <form action="">
                 <div className="rigth_container_footer_form">

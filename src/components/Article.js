@@ -23,20 +23,31 @@ const Article = ({newArticle}) => {
     } 
     const article = {
         quantiteArticle : 0,
-        produit : {...emptyProduit}
+        produit : {...emptyProduit},
+        montantTotalParArticle : (quantiteArticle,prixProduit)=>{return quantiteArticle*prixProduit}
     }
+
+    
+
     const commande = {
         tableArticle : [],
         idClient : 0,
         statutCommande : '',
         dateCommande : null,
-        heureCommande : null
+        heureCommande : null,
+        montantTotalParCommande : (tableArticle)=>{
+            return ()=>{
+                let montant = 0;
+                tableArticle.forEach(element => {montant += element.montantTotalParArticle; });                
+                return montant;
+            }
+        },
     }
+    
 
     const {paramGlobal,setParamGlobal} = useContext(GlobalContext);
     const {actionEncours,devise,displayFooter,produitEncours,commandeEnCours,utilisateurEnCours} = paramGlobal;
     const [articleEnCours,setAaticleEnCours] = useState({...article,...newArticle});
-
     const {tableArticle,idClient,statutCommande,dateCommande,heureCommande} = {...commandeEnCours};
 
     const [quantiteArticleEnCours,setQuantiteArticleEnCours] = useState({quantie:0,index:-1});
@@ -51,43 +62,45 @@ const Article = ({newArticle}) => {
         {
             quantie += 1;
             setQuantiteArticleEnCours({quantie:quantie,index:index});             
-        }else{
-            quantie -= 1;
-            if(quantiteArticleEnCours.quantie > 0){setQuantiteArticleEnCours({quantie:quantie,index:index});}
         }
+        if(type===-1){
+            quantie -= 1;
+            quantie = quantie > 0  ? quantie : 0;
+            setQuantiteArticleEnCours({quantie:quantie,index:index});
+        }        
+
         if(index > -1){            
             tableArticle[index].quantiteArticle = quantie;
+            const tableArticleFiltree = tableArticle.filter((elt)=>elt.quantiteArticle > 0 )
             let updateCommande = {...commande};
-            updateCommande = {...commandeEnCours,tableArticle:tableArticle}
+            updateCommande = {...commandeEnCours,tableArticle:[...tableArticleFiltree]};
+            setParamGlobal({...paramGlobal,commandeEnCours:{...updateCommande}})                       
         }
+
     }
     
     useEffect(() => {
         
-        let articleEnEntree = article;
-        articleEnEntree = {...articleEnEntree,...newArticle}; 
-              
-        if(articleEnEntree.produit.codeProduit === ''){return}
+        if(articleEnCours.produit.codeProduit === ''){return}    
         
-        setAaticleEnCours({...articleEnEntree});        
-
         let quantiteArticle = 0;
         let indexArticle = -1;
-        tableArticle.forEach(element => {
-            if(element.produit.codeProduit === articleEnEntree.produit.codeProduit){
+        tableArticle.forEach((element,index) => {
+            if(element.produit.codeProduit === articleEnCours.produit.codeProduit){
                 //------ verification de la présence de articleEnEntree dans commandeEnCours
                 quantiteArticle += element.quantiteArticle;
-                indexArticle += 1;
+                //indexArticle += 1;
+                indexArticle = index;
             }
         });
+        
         if(indexArticle > -1){
-            //----- articleEnEntree est dejà présent dans commandeEnCours --------
-            quantiteArticle += 1;
-            setQuantiteArticleEnCours({quantie:quantiteArticle,index:indexArticle});
+            //----- articleEnEntree est dejà présent dans commandeEnCours --------            
+            setQuantiteArticleEnCours({quantie:quantiteArticle,index:indexArticle});                       
         } else{
             setQuantiteArticleEnCours({quantie:1,index:-1});
-        }      
-        
+        } ;
+            
     }, [paramGlobal]);
 
     return ( 
@@ -99,13 +112,13 @@ const Article = ({newArticle}) => {
                 <div className="article_middle_price">{articleEnCours.produit.prixProduit+" "+devise}</div>
             </div>
             <div className="article_left">
-                <span onClick={()=>{handleQuantiteArticleEnCours(1)}} className="material-symbols-outlined article_left_upload">upload</span>
+                <span onClick={()=>{handleQuantiteArticleEnCours(1)}} className="material-symbols-outlined article_left_download">arrow_upward</span>
                 <div className="article_quantity">{"x "+quantiteArticleEnCours.quantie}</div>
-                <span onClick={()=>{handleQuantiteArticleEnCours(0)}} className="material-symbols-outlined article_left_download">download</span>
+                <span onClick={()=>{handleQuantiteArticleEnCours(-1)}} className="material-symbols-outlined article_left_upload">arrow_downward</span>
             </div>                        
         </div>
         )
      );
 }
- 
+
 export default Article;

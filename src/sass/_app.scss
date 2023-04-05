@@ -37,6 +37,7 @@
     flex-direction: column;
     width: 75%;
     min-width: $min_width;
+    flex-grow: 1;
 }
 
 .lef_container_Btn_valider_commande{

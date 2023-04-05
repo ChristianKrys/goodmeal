@@ -17,7 +17,11 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    align-items: center;    
+}
+.assombrir{
+    /* Assombrir à 80%*/
+    filter: grayscale(80%);
 }
 .produit_top{
     position: relative;
@@ -45,7 +49,7 @@
     align-content: center;
 
     img{
-        width: 220px;
+        width: 80%;//220px;
         border-radius: 0.5rem;
     }
 }

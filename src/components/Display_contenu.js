@@ -1,15 +1,26 @@
+import { useContext } from "react";
+import GlobalContext from "../contexts/GlobalContext";
+import IdentificationForm from "./IdentificationForm";
 import Produit from "./Produit";
 
 const Display_contenu = () => {
+
+
+
+    const {paramGlobal,setParamGlobal} = useContext(GlobalContext);
+    const {actionEncours,devise,displayFooter,produitEncours,commandeEnCours,utilisateurEnCours,listeProduit,authentificationEnCours} = paramGlobal;
+    const {tableArticle,idClient,statutCommande,dateCommande,heureCommande} = {...commandeEnCours};
+
+
     return ( 
-        <div className="rigth_container_display_affichage">            
-            <Produit/>
-            <Produit/>
-            <Produit/>
-            <Produit/>
-            <Produit/>
-            <Produit/>
-        </div>
+        <>
+            {!authentificationEnCours && <div className="rigth_container_display_affichage"> 
+                {listeProduit.map((produit)=>{
+                    return <Produit key={produit.codeProduit} newProduit={produit}/>
+                })}     
+            </div>}
+            {authentificationEnCours && <IdentificationForm />}
+        </>
      );
 }
  

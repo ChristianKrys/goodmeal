@@ -1,4 +1,42 @@
+import { useContext, useState } from "react";
+import GlobalContext from "../contexts/GlobalContext";
+
 const Navbar = () => {
+        
+    const {paramGlobal,setParamGlobal} = useContext(GlobalContext);
+    const {actionEncours,devise,displayFooter,produitEncours,commandeEnCours,utilisateurEnCours,listeProduit,modeEnCours,authentificationEnCours} = paramGlobal;
+    //const {tableArticle,idClient,statutCommande,dateCommande,heureCommande} = {...commandeEnCours};
+
+    const [typeCompte,setTypeCompte] = useState("visiteur");
+    const [modeConnexion,setModeConnexion] = useState("client");
+
+    const utilisateur = {
+        nomUtilisateur : '',
+        prenomUtilisateur : '',
+        telephoneUtilisateur : '',
+        emailUtilisateur : '',
+        addresseUtilisateur : '',
+        statutUtilisateur : '',  
+        typeCompteUtilisateur : 'visiteur'      
+    }
+    
+    //statutCommande : livree, nonlivree
+    //action : addProduct, modifyProduct
+    //typeCompteUtilisateur : visiteur,abonne, administrateur
+    //modeEnCours : admin, client
+    
+    
+
+    const handleModeConnexion = (modeEnCours ==="admin") ? "Désactiver le mode ADMIN":"Activer le mode ADMIN";
+    const deconnexion = (utilisateurEnCours.typeCompteUtilisateur==="visiteur") ? "Se Connecter" : "Déconnexion";
+
+    const changeModeEnCours = ()=>{
+        const newModeEnCours = paramGlobal.modeEnCours === "admin" ? "client" : "admin";
+        setParamGlobal({...paramGlobal,modeEnCours:newModeEnCours})
+    }
+
+    const handleauthentificationEnCours = ()=>{setParamGlobal({...paramGlobal,authentificationEnCours:!paramGlobal.authentificationEnCours})}
+
     return ( 
         <div className="navbar">
             <div className="navbar_logo">
@@ -7,17 +45,17 @@ const Navbar = () => {
                 <div className="navbar_logo_titre">BURGER</div>
             </div>
             <div className="navbar_login">
-                <div className="navbar_login_btn_admin">
-                    <div className="navbar_login_btn_admin_texte">Désactiver le mode ADMIN</div>
+                {utilisateurEnCours.typeCompteUtilisateur === 'administrateur'  && <div className="navbar_login_btn_admin" onClick={changeModeEnCours}>
+                    <div className="navbar_login_btn_admin_texte">{handleModeConnexion}</div>
                     <div className="navbar_login_btn_admin_image"></div>
-                </div>
+                </div>}
                 <div className="navbar_login_connexion">
                     <div className="navbar_login_connexion_identifiant">
-                        <div className="navbar_login_connexion_identifiant_salutation">
+                        {!(utilisateurEnCours.typeCompteUtilisateur==="visiteur") && <div className="navbar_login_connexion_identifiant_salutation">
                             <span className="navbar_login_connexion_identifiant_salutation_message">Hey, </span>
-                            <span className="navbar_login_connexion_identifiant_salutation_prenom">Christian</span>
-                        </div>
-                        <div className="navbar_login_connexion_identifiant_btn_SeConnecter">Se Déconnecter</div>
+                            <span className="navbar_login_connexion_identifiant_salutation_prenom">{utilisateurEnCours.prenomUtilisateur}</span>
+                        </div>}
+                        <div className="navbar_login_connexion_identifiant_btn_SeConnecter" onClick={handleauthentificationEnCours}>{deconnexion}</div>
                     </div>
                     <div className="navbar_login_connexion_avatar">                        
                         <img src="images/logo_profil.png" alt="" />

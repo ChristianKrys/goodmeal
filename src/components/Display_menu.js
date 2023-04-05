@@ -26,31 +26,36 @@ const Display_menu = () => {
     
     const valClass = "btn_rigth_container_display_menu";
     const valClass_selected = "btn_rigth_container_display_menu_selected";
-    const [derouler,setDerouler] = useState(valClass);
+
+/*     const [derouler,setDerouler] = useState(valClass);
     const [ajouter,setAjouter] = useState(valClass);
-    const [modifier,setModifier] = useState(valClass);
+    const [modifier,setModifier] = useState(valClass); */
+    const [action,setAction] = useState({derouler:valClass,ajouter:valClass,modifier:valClass})
 
     function handleClick(e){
         const targetId = e.target.id;        
         if(targetId.search("derouler") >= 0){
-            setDerouler(valClass);
+/*             setDerouler(valClass);
             setAjouter(valClass);
-            setModifier(valClass);
+            setModifier(valClass); */
+            setAction({derouler:valClass,ajouter:valClass,modifier:valClass})
             
             setParamGlobal({...paramGlobal,actionEncours:'',displayFooter:false});
         }        
         if(targetId.search("ajouter") >= 0){            
-            setDerouler(valClass);
+/*             setDerouler(valClass);
             setAjouter(valClass_selected);
-            setModifier(valClass);
+            setModifier(valClass); */
+            setAction({derouler:valClass,ajouter:valClass_selected,modifier:valClass})
 
-            setParamGlobal({actionEncours:'addProduct',displayFooter:true,produitEncours:emptyProduit});
+            setParamGlobal({...paramGlobal,actionEncours:'addProduct',displayFooter:true,produitEncours:emptyProduit});
             
         }
         if(targetId.search("modifier") >= 0){
-            setDerouler(valClass);
+/*             setDerouler(valClass);
             setAjouter(valClass);
-            setModifier(valClass_selected);
+            setModifier(valClass_selected); */
+            setAction({derouler:valClass,ajouter:valClass,modifier:valClass_selected})
 
             setParamGlobal({...paramGlobal,actionEncours:'modifyProduct',displayFooter:true});
         }        
@@ -61,19 +66,22 @@ const Display_menu = () => {
     }, []);
 
     return ( 
-        <div className="rigth_container_display_menu">                     
-            <div id="derouler1" className={derouler+" btn_rigth_container_display_menu"} onClick={(e)=>{handleClick(e)}}>                    
-                <span id="derouler2" className="material-symbols-outlined">expand_more</span>
-            </div>
-            <div id="ajouter1" className={ajouter+" btn_rigth_container_display_menu"} onClick={(e)=>{handleClick(e)}}>
-                <span id="ajouter2" className="material-symbols-outlined">add</span>
-                <span id="ajouter3">Ajouter un produit</span>
-            </div>
-            <div id="modifier1" className={modifier+" btn_rigth_container_display_menu"} onClick={(e)=>{handleClick(e)}}>
-                <span id="modifier2" className="material-symbols-outlined">Edit</span>
-                <span id="modifier3">Modifier un produit</span>
-            </div>
-        </div>
+        <>
+            {paramGlobal.modeEnCours === "admin" && <div className="rigth_container_display_menu">                     
+                <div id="derouler1" className={action.derouler+" btn_rigth_container_display_menu"} onClick={(e)=>{handleClick(e)}}>                    
+                    <span id="derouler2" className="material-symbols-outlined">expand_more</span>
+                </div>
+                <div id="ajouter1" className={action.ajouter+" btn_rigth_container_display_menu"} onClick={(e)=>{handleClick(e)}}>
+                    <span id="ajouter2" className="material-symbols-outlined">add</span>
+                    <span id="ajouter3">Ajouter un produit</span>
+                </div>
+                <div id="modifier1" className={action.modifier+" btn_rigth_container_display_menu"} onClick={(e)=>{handleClick(e)}}>
+                    <span id="modifier2" className="material-symbols-outlined">Edit</span>
+                    <span id="modifier3">Modifier un produit</span>
+                </div>
+            </div>}
+        </>
+
      );
 }
  
