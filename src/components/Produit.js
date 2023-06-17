@@ -4,8 +4,9 @@ import GlobalContext from "../contexts/GlobalContext";
 const Produit = ({newProduit}) => {
 
     const {paramGlobal,setParamGlobal} = useContext(GlobalContext);
-    const {actionEncours,modeEnCours,devise,displayFooter,produitEncours,commandeEnCours,utilisateurEnCours,listeProduit,urlServer} = paramGlobal;
+    const {baseDeDonnee,actionEncours,modeEnCours,devise,displayFooter,produitEncours,commandeEnCours,utilisateurEnCours,listeProduit,urlServer} = paramGlobal;
     const {tableArticle,idClient,statutCommande,dateCommande,heureCommande} = {...commandeEnCours};
+    const {Coll_Produit,Coll_Utilisateur,Coll_Commande} = baseDeDonnee;
 
     const emptyProduit = {
         urlPhoto:'',
@@ -57,8 +58,8 @@ const Produit = ({newProduit}) => {
 
     function supprimeProduct(product){ 
         let suppressionReussie = true;
-        const id = product.id;
-        const url = urlServer+"Produit/"+id;          
+        const id = product._id;
+        const url = urlServer+Coll_Produit+"/"+id//"Produit/"+id;          
         fetch(url,{
             method: 'DELETE',                  
         })

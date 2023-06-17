@@ -1,5 +1,5 @@
 {
-  "Produit": [
+  "produits": [
     {
       "urlPhoto": "images/burger.jpg",
       "libelleProduit": "Tomate",
@@ -55,13 +55,13 @@
       "libelleProduit": "Ndjomba Secret",
       "prixProduit": 1500,
       "enstock": true,
-      "avecpublicite": false,
+      "avecpublicite": "true",
       "description": "La tomate brune",
       "codeProduit": "commco",
       "id": 6
     }
   ],
-  "Utilisateur": [
+  "utilisateurs": [
     {
       "nomUtilisateur": "",
       "prenomUtilisateur": "Christian",
@@ -87,7 +87,7 @@
       "id": 2
     }
   ],
-  "Commande": [
+  "commandes": [
     {
       "tableArticle": [
         {
@@ -144,6 +144,41 @@
       "dateCommande": null,
       "heureCommande": null,
       "id": 2
+    },
+    {
+      "tableArticle": [
+        {
+          "quantiteArticle": 1,
+          "produit": {
+            "urlPhoto": "images/frite.jpg",
+            "libelleProduit": "NEW YORK FRITS",
+            "prixProduit": 50,
+            "enstock": true,
+            "avecpublicite": false,
+            "description": "Les frites de New York",
+            "codeProduit": "papa",
+            "id": 2
+          }
+        },
+        {
+          "quantiteArticle": 5,
+          "produit": {
+            "urlPhoto": "images/burger.jpg",
+            "libelleProduit": "Tomate",
+            "prixProduit": 100,
+            "enstock": true,
+            "avecpublicite": true,
+            "description": "Le burger à l'huile de chèvre",
+            "codeProduit": "coco",
+            "id": 1
+          }
+        }
+      ],
+      "idClient": 0,
+      "statutCommande": "",
+      "dateCommande": null,
+      "heureCommande": null,
+      "id": 3
     }
   ]
 }

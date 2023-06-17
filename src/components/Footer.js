@@ -15,7 +15,8 @@ const Footer = () => {
     }        
 
     const {paramGlobal,setParamGlobal} = useContext(GlobalContext);
-    const {actionEncours:action,produitEncours,displayFooter,urlServer,listeProduit} = paramGlobal;
+    const {baseDeDonnee,actionEncours:action,produitEncours,displayFooter,urlServer,listeProduit} = paramGlobal;
+    const {Coll_Produit,Coll_Utilisateur,Coll_Commande} = baseDeDonnee;
     
     //action : addProduct, modifyProduct
     const [product,setProduct] = useState({...emptyProduit,...produitEncours});    
@@ -39,7 +40,7 @@ const Footer = () => {
     }
     
     function addProduct(product){ 
-        const url = urlServer+"Produit";          
+        const url = urlServer+Coll_Produit;          
         fetch(url,{
             method: 'POST',
             headers: {'Content-type':'application/json'},
@@ -61,10 +62,11 @@ const Footer = () => {
     }
 
     function modifyProduct(product){ 
-        const id = product.id;
-        const url = urlServer+"Produit/"+id;          
+        const id = product._id;
+        const url = urlServer+Coll_Produit+"/"+id;          
         fetch(url,{
-            method: 'PATCH',
+            //method: 'PATCH',
+            method: 'PUT',
             headers: {'Content-type':'application/json'},
             body: JSON.stringify(product)                    
         })

@@ -16,7 +16,8 @@ const Display_contenu = () => {
         <>
             {!authentificationEnCours && <div className="rigth_container_display_affichage">             
                 {listeProduit.map((produit)=>{                    
-                    return <Produit key={produit.codeProduit} newProduit={produit}/>
+                    //return <Produit key={produit.codeProduit} newProduit={produit}/>
+                    return <Produit key={produit._id} newProduit={produit}/>
                 })}     
             </div>}
             {authentificationEnCours && <IdentificationForm />}                                 

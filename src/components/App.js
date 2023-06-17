@@ -9,6 +9,13 @@ import AffichePanier from "./AffichePanier";
 
 const App = ()=>{
     
+    //--Table : Produit, Client, Employer, Commande
+    const bd_goodmeal = {
+        Coll_Produit : "produits",
+        Coll_Utilisateur : "utilisateurs",
+        Coll_Commande : "commandes"
+    }    
+
     const emptyProduit = {
         urlPhoto:'',
         libelleProduit:'',
@@ -17,7 +24,7 @@ const App = ()=>{
         avecpublicite:false,
         description:'',
         codeProduit:'',
-        id:0
+        _id:null
     } 
     const article = {
         quantiteArticle : 0,
@@ -55,6 +62,11 @@ const App = ()=>{
     //typeCompteUtilisateur : visiteur,abonne, administrateur
     //modeEnCours : admin, client
 
+    //----- Serveur de donnees ---------
+//const db_Url ='http://localhost:8001/'
+const db_Url = "http://localhost:3002/goodmeal-api/v1/";
+
+
     const globalStore = {
         actionEncours:'',
         devise:'F.cfa',
@@ -67,7 +79,8 @@ const App = ()=>{
         listeCommande : [],
         modeEnCours: 'client',
         authentificationEnCours: false,
-        urlServer : 'http://localhost:8001/'
+        urlServer : db_Url,
+        baseDeDonnee : {...bd_goodmeal}
     }
 
     const [paramGlobal,setParamGlobal] = useState(globalStore);
@@ -75,8 +88,9 @@ const App = ()=>{
     const [error,setError] = useState(false);
     const [dataBase,setDataBase] = useState({listeProduit:[],listeClient:[],listeEmployer:[],listeCommande:[]})
 
-    const {actionEncours,devise,displayFooter,produitEncours,commandeEnCours,utilisateurEnCours,listeProduit,modeEnCours,authentificationEnCours,urlServer} = paramGlobal;
+    const {baseDeDonnee,actionEncours,devise,displayFooter,produitEncours,commandeEnCours,utilisateurEnCours,listeProduit,modeEnCours,authentificationEnCours,urlServer} = paramGlobal;
     const {tableArticle,idClient,statutCommande,dateCommande,heureCommande} = {...commandeEnCours};
+    const {Coll_Produit,Coll_Utilisateur,Coll_Commande} = baseDeDonnee;
     
     useEffect(() => {
 
@@ -96,14 +110,19 @@ const App = ()=>{
             .then((reponse)=>{
                 setisLoading(false);
                 if(!reponse.ok){
-                    throw Error('Désolé, une erreur est survenue');
-                }                
-                return reponse.json();                
+                    throw Error('Désolé, une erreur est survenue ');
+                }               
+                return reponse.json();                                
             })
             .then((data)=>{                                             
-                if(table === "Produit") listeProduit = data;
-                if(table === "Utilisateur") listeUtilisateur = data;                
-                if(table === "Commande") listeCommande = data;                              
+                //if(table === "Produit") listeProduit = data;
+                //if(table === "Utilisateur") listeUtilisateur = data;                
+                //if(table === "Commande") listeCommande = data;   
+
+                if(table === Coll_Produit) listeProduit = data;
+                if(table === Coll_Utilisateur) listeUtilisateur = data;                
+                if(table === Coll_Commande) listeCommande = data; 
+                
             })
             .catch((err)=>{
                 console.log(err.message);
@@ -118,9 +137,13 @@ const App = ()=>{
         }
 
         //--Table : Produit, Client, Employer, Commande
-        fetchData("Produit");
-        fetchData("Utilisateur");
-        fetchData("Commande");                              
+        //fetchData("Produit");
+        //fetchData("Utilisateur");
+        //fetchData("Commande"); 
+        
+        fetchData(Coll_Produit);
+        fetchData(Coll_Utilisateur);
+        fetchData(Coll_Commande);
 
     }, []);
     

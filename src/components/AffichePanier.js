@@ -4,8 +4,9 @@ import Article from "./Article";
 
 const AffichePanier = () => {
     const {paramGlobal,setParamGlobal} = useContext(GlobalContext);
-    const {actionEncours,devise,displayFooter,produitEncours,commandeEnCours,utilisateurEnCours,listeProduit,urlServer} = paramGlobal;
+    const {baseDeDonnee,actionEncours,devise,displayFooter,produitEncours,commandeEnCours,utilisateurEnCours,listeProduit,urlServer} = paramGlobal;
     const {tableArticle,idClient,statutCommande,dateCommande,heureCommande} = {...commandeEnCours};
+    const {Coll_Produit,Coll_Utilisateur,Coll_Commande} = baseDeDonnee;
 
     //////////*********** */
     const emptyProduit = {
@@ -16,7 +17,7 @@ const AffichePanier = () => {
         avecpublicite:false,
         description:'',
         codeProduit:'',
-        id:0
+        _id:null
     } 
     const article = {
         quantiteArticle : 0,
@@ -45,7 +46,7 @@ const AffichePanier = () => {
     }
 
     function handleValiderCommande(commande){ 
-        const url = urlServer+"Commande";          
+        const url = urlServer+Coll_Commande;//"Commande";          
         fetch(url,{
             method: 'POST',
             headers: {'Content-type':'application/json'},

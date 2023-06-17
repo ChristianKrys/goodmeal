@@ -1,0 +1,64 @@
+{
+    "produits": [
+      {
+        "urlPhoto": "images/burger.jpg",
+        "libelleProduit": "Tomate",
+        "prixProduit": 100,
+        "enstock": true,
+        "avecpublicite": true,
+        "description": "Le burger à l'huile de chèvre",
+        "codeProduit": "coco",
+        "id": 1
+      },
+      {
+        "urlPhoto": "images/frite.jpg",
+        "libelleProduit": "NEW YORK FRITS",
+        "prixProduit": 50,
+        "enstock": true,
+        "avecpublicite": false,
+        "description": "Les frites de New York",
+        "codeProduit": "papa",
+        "id": 2
+      },
+      {
+        "urlPhoto": "images/produit2.jpg",
+        "libelleProduit": "COCKTAIL",
+        "prixProduit": 160,
+        "enstock": false,
+        "avecpublicite": false,
+        "description": "Les frites de New York",
+        "codeProduit": "hgjjgf",
+        "id": 3
+      },
+      {
+        "urlPhoto": "images/produit6.jpg",
+        "libelleProduit": "Basket",
+        "prixProduit": 50,
+        "enstock": true,
+        "avecpublicite": false,
+        "description": "Les frites de New York",
+        "codeProduit": "fhhf",
+        "id": 4
+      },
+      {
+        "urlPhoto": "images/clou.png",
+        "libelleProduit": "COCKTAIL",
+        "prixProduit": 160,
+        "enstock": false,
+        "avecpublicite": false,
+        "description": "Les frites de New York",
+        "codeProduit": "hggf",
+        "id": 5
+      },
+      {
+        "urlPhoto": "images/produit4.jpg",
+        "libelleProduit": "Ndjomba Secret",
+        "prixProduit": 1500,
+        "enstock": true,
+        "avecpublicite": "true",
+        "description": "La tomate brune",
+        "codeProduit": "commco",
+        "id": 6
+      }
+    ]
+  }

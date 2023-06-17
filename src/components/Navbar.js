@@ -50,7 +50,7 @@ const Navbar = () => {
                 typeCompteUtilisateur : 'visiteur'  ,
                 login : '',
                 pwd : '',
-                id : 0   
+                _id : null   
             }
             const commande = {
                 tableArticle : [],
