@@ -1,17 +1,13 @@
-import { useContext, useEffect, useState } from "react"
-import GlobalContext from "../contexts/GlobalContext"
+import { useContext, useEffect, useState } from "react";
+import GlobalContext from "../contexts/GlobalContext";
+import model from "../models/models";
 
 const Article = ({newArticle}) => {
 
     //------ Prend en entrée un article du panier, l'affiche et modifie l'état du panier dans paramGlobal ----
-/*     const globalStore = {
-        actionEncours:'',
-        devise:'£';
-        displayFooter:false, 
-        produitEncours:{...emptyProduit},               
-        commandeEnCours : {...commande},
-        utilisateurEnCours : {...utilisateur}
-    } */
+    
+    const {bd_goodmeal,utilisateur,commande,emptyProduit,article} = model;
+/*
     const emptyProduit = {
         urlPhoto:'images/frite.jpg',
         libelleProduit:'NEW YORK FRITS',
@@ -43,7 +39,7 @@ const Article = ({newArticle}) => {
             }
         },
     }
-    
+    */
 
     const {paramGlobal,setParamGlobal} = useContext(GlobalContext);
     const {actionEncours,devise,displayFooter,produitEncours,commandeEnCours,utilisateurEnCours} = paramGlobal;

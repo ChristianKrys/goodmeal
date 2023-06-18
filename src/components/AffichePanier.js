@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import GlobalContext from "../contexts/GlobalContext";
 import Article from "./Article";
+import model from "../models/models";
 
 const AffichePanier = () => {
     const {paramGlobal,setParamGlobal} = useContext(GlobalContext);
@@ -8,7 +9,10 @@ const AffichePanier = () => {
     const {tableArticle,idClient,statutCommande,dateCommande,heureCommande} = {...commandeEnCours};
     const {Coll_Produit,Coll_Utilisateur,Coll_Commande} = baseDeDonnee;
 
-    //////////*********** */
+    const {bd_goodmeal,utilisateur,commande,emptyProduit,article} = model;
+
+
+    /*//////////***********
     const emptyProduit = {
         urlPhoto:'',
         libelleProduit:'',
@@ -81,5 +85,6 @@ const AffichePanier = () => {
         </div> 
      );
 }
+
  
 export default AffichePanier;

@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import GlobalContext from "../contexts/GlobalContext";
+import model from "../models/models";
 
 const IdentificationForm = () => {
 
@@ -14,8 +15,10 @@ const IdentificationForm = () => {
     const handleFermer = ()=>{setParamGlobal({...paramGlobal,authentificationEnCours:false})}
     const handleSubmit = (evt)=>{
         evt.preventDefault();
+        
+        const {bd_goodmeal,utilisateur,commande,emptyProduit,article} = model;
 
-        const utilisateur = {        
+/*         const utilisateur = {        
             nomUtilisateur : '',
             prenomUtilisateur : '',
             telephoneUtilisateur : '',
@@ -25,7 +28,8 @@ const IdentificationForm = () => {
             typeCompteUtilisateur : 'visiteur'  ,
             login : '',
             pwd : ''    
-        }
+        } */
+
         let indexTrouve = -1;
 
         listeUtilisateur.forEach((element,index) => {

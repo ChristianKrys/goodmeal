@@ -1,17 +1,19 @@
 import { useContext, useEffect, useState } from "react";
 import GlobalContext from "../contexts/GlobalContext";
-
+import model from "../models/models";
 
 const Display_menu = () => {
 
-    const emptyProduit = {
+    const {bd_goodmeal,utilisateur,commande,emptyProduit,article} = model;
+
+/*     const emptyProduit = {
         urlPhoto:'',
         libelleProduit:'',
         prixProduit:'',
         enstock:false,
         avecpublicite:false,
         description:''
-    }         
+    }   */       
     
     //action : addProduct, modifyProduct
     const globalStore = {        

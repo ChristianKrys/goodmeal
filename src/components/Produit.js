@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import GlobalContext from "../contexts/GlobalContext";
+import model from "../models/models";
 
 const Produit = ({newProduit}) => {
 
@@ -8,7 +9,9 @@ const Produit = ({newProduit}) => {
     const {tableArticle,idClient,statutCommande,dateCommande,heureCommande} = {...commandeEnCours};
     const {Coll_Produit,Coll_Utilisateur,Coll_Commande} = baseDeDonnee;
 
-    const emptyProduit = {
+    const {bd_goodmeal,utilisateur,commande,emptyProduit,article} = model;
+
+/*     const emptyProduit = {
         urlPhoto:'',
         libelleProduit:'',
         prixProduit:0,
@@ -16,7 +19,7 @@ const Produit = ({newProduit}) => {
         avecpublicite:false,
         description:'',
         codeProduit:''
-    }
+    } */
 
     const [copyNewProduit,setCopyNewProduit] = useState({...emptyProduit,...newProduit});
     const [supprimerProduit,setSupprimerProduit] = useState(false);

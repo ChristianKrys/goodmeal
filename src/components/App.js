@@ -6,9 +6,12 @@ import { useEffect, useState } from "react";
 import Article from "./Article";
 import Bande from "./Bande";
 import AffichePanier from "./AffichePanier";
+import model from "../models/models";
 
 const App = ()=>{
     
+    const {bd_goodmeal,utilisateur,commande,emptyProduit,article} = model;
+/*     
     //--Table : Produit, Client, Employer, Commande
     const bd_goodmeal = {
         Coll_Produit : "produits",
@@ -56,7 +59,7 @@ const App = ()=>{
         statutUtilisateur : '',  
         typeCompteUtilisateur : 'visiteur'      
     }
-
+ */
     //statutCommande : livree, nonlivree
     //action : addProduct, modifyProduct, listerCommande
     //typeCompteUtilisateur : visiteur,abonne, administrateur

@@ -1,18 +1,19 @@
 import { useContext, useEffect, useState } from "react";
 import GlobalContext from "../contexts/GlobalContext";
+import model from "../models/models";
 
 const Footer = () => {
+
+    const {bd_goodmeal,utilisateur,commande,emptyProduit,article} = model;
         
-
-
-    const emptyProduit = {
+/*     const emptyProduit = {
         urlPhoto:'',
         libelleProduit:'',
         prixProduit:'',
         enstock:false,
         avecpublicite:false,
         description:''
-    }        
+    }    */     
 
     const {paramGlobal,setParamGlobal} = useContext(GlobalContext);
     const {baseDeDonnee,actionEncours:action,produitEncours,displayFooter,urlServer,listeProduit} = paramGlobal;

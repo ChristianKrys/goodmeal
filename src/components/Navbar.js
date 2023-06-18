@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import GlobalContext from "../contexts/GlobalContext";
+import model from "../models/models";
 
 const Navbar = () => {
         
@@ -10,7 +11,7 @@ const Navbar = () => {
     //const [typeCompte,setTypeCompte] = useState("visiteur");
     //const [modeConnexion,setModeConnexion] = useState("client");
 
-    const utilisateur = {
+/*     const utilisateur = {
         nomUtilisateur : '',
         prenomUtilisateur : '',
         telephoneUtilisateur : '',
@@ -18,7 +19,7 @@ const Navbar = () => {
         addresseUtilisateur : '',
         statutUtilisateur : '',  
         typeCompteUtilisateur : 'visiteur'      
-    }
+    } */
     
     //statutCommande : livree, nonlivree
     //action : addProduct, modifyProduct
@@ -40,7 +41,9 @@ const Navbar = () => {
         {
             setParamGlobal({...paramGlobal,authentificationEnCours:true});
         }else{
-            const utilisateur = {        
+            
+            const {bd_goodmeal,utilisateur,commande,emptyProduit,article} = model;
+/*             const utilisateur = {        
                 nomUtilisateur : '',
                 prenomUtilisateur : '',
                 telephoneUtilisateur : '',
@@ -65,7 +68,7 @@ const Navbar = () => {
                          });                           
                         return montant;        
                 },
-            }
+            } */
             setParamGlobal({...paramGlobal,commandeEnCours:{...commande},modeEnCours:"client",utilisateurEnCours : {...utilisateur},authentificationEnCours:false })  
         }
     }
